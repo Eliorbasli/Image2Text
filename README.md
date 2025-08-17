@@ -1,6 +1,6 @@
 # Asynchronous Image Processing Service
 
-## ðŸ“Œ Overview
+## Overview
 This project provides an asynchronous service to process image files (JPG/PNG) and extract text from them.  
 It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](https://www.rabbitmq.com/)**, and **SQLite**, wrapped in **Docker** for easy setup.
 
