@@ -1,68 +1,122 @@
-Asynchronous Image Processing Service
-Overview
+# ðŸ–¼ï¸ Asynchronous Image Processing Service
 
-This project provides an asynchronous service to process image files (JPG/PNG) and extract text from them.
-It is built with FastAPI, RabbitMQ, and SQLite, wrapped in Docker for easy setup.
+## ðŸ“Œ Overview
+This project provides an asynchronous service to process image files (JPG/PNG) and extract text from them.  
+It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](https://www.rabbitmq.com/)**, and **SQLite**, wrapped in **Docker** for easy setup.
 
-Producer: FastAPI app for submitting images and querying job status/results
+- **Producer**: FastAPI app for submitting images and querying job status/results  
+- **Consumer**: Worker service that consumes jobs from RabbitMQ, extracts text, and stores results in the database  
+- **Common**: Shared utilities (DB models, config, RabbitMQ, and Enums)  
 
-Consumer: Worker service that consumes jobs from RabbitMQ, extracts text, and stores results in the database
+![Architecture Diagram](docs/architecture.png)  
+*(Replace with your architecture diagram if available)*  
 
-Common: Shared utilities (DB models, config, RabbitMQ, and Enums)
+---
 
-How to Run
+## ðŸš€ How to Run
 
-Clone & navigate into the project:
+1. **Clone & navigate into the project**
+   ```bash
+   git clone https://github.com/Eliorbasli/Image2Text.git
+   cd image2text
+   ```
 
-git clone https://github.com/Eliorbasli/Image2Text.git
-cd image2text
+2. **Create a `.env` file** in the root folder with your configuration:
+   ```env
+   AMQP_URL=amqp://guest:guest@rabbitmq:5672/
+   SQLITE_PATH=/data/app.db
+   UPLOAD_DIR=/data/uploads
+   ```
 
+3. **Build and start the services**
+   ```bash
+   docker compose up --build
+   ```
 
-Create a .env file in the root folder with your configuration.
+   âœ… This will start:
+   - ðŸ‡ **RabbitMQ** â†’ [http://localhost:15672](http://localhost:15672) (`guest/guest`)  
+   - âš¡ **Producer API (FastAPI)** â†’ [http://localhost:8000](http://localhost:8000)  
+   - ðŸ”„ **Consumer worker**
 
-Build and start the services:
+   To view logs:
+   ```bash
+   docker compose logs -f consumer
+   docker compose logs -f producer
+   ```
 
-docker compose up --build
+---
 
+## ðŸ”— API Endpoints
 
-This will start:
+### 1. ðŸ“¤ Submit a new image job
+`POST /submit`  
+Upload a JPG/PNG image for text extraction.  
 
-RabbitMQ (UI at http://localhost:15672, user/pass = guest / guest)
+**Input:** multipart/form-data with field `file`  
 
-Producer API (FastAPI) on http://localhost:8000
+**Response:** JSON containing `job_id`  
 
-Consumer worker
+Example with [cURL](https://curl.se/):  
+```bash
+curl -X POST "http://localhost:8000/submit" \
+  -F "file=@tests/sample_images/test.png"
+```
 
-To view logs:
+---
 
-docker compose logs -f consumer
-docker compose logs -f producer
+### 2. ðŸ“Š Get job status
+`GET /status/{job_id}`  
 
-API Endpoints
-1. Submit a new image job
+Check if the job is `queued`, `processing`, `done`, or `failed`.  
 
-POST /submit
-Upload a JPG/PNG image for text extraction.
+Response:
+```json
+{
+  "job_id": "1234-uuid",
+  "status": "processing"
+}
+```
 
-Input: multipart/form-data with field file
-Response: JSON containing job_id
+---
 
-2. Get job status
+### 3. ðŸ“œ Get job result
+`GET /result/{job_id}`  
 
-GET /status/{job_id}
-Check if the job is queued, processing, done, or failed.
+If the job is done, returns the extracted text.  
 
-3. Get job result
+Response:
+```json
+{
+  "job_id": "1234-uuid",
+  "result": "Detected text from image..."
+}
+```
 
-GET /result/{job_id}
-If the job is done, returns the extracted text.
+---
 
-Testing the API
+## ðŸ§ª Testing the API
 
-A sample Python client is included:
+A sample Python client is included:  
 
+```bash
 cd tests
 python python_client.py
+```
 
+Sample images are available in:  
+ðŸ“‚ `tests/sample_images/`  
 
-Sample images are available in tests/sample_images/.
+Example result screenshot:  
+
+![Result Example](docs/result-example.png)  
+*(Replace with your screenshot showing job result)*  
+
+---
+
+## ðŸ“· UI Previews
+
+- RabbitMQ Management:  
+  ![RabbitMQ UI](docs/rabbitmq-ui.png)  
+
+- FastAPI Docs:  
+  ![FastAPI Swagger](docs/fastapi-docs.png)  
