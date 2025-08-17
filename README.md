@@ -1,4 +1,4 @@
-# ðŸ–¼ï¸ Asynchronous Image Processing Service
+# Asynchronous Image Processing Service
 
 ## ðŸ“Œ Overview
 This project provides an asynchronous service to process image files (JPG/PNG) and extract text from them.  
@@ -13,7 +13,7 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
 
 ---
 
-## ðŸš€ How to Run
+## How to Run
 
 1. **Clone & navigate into the project**
    ```bash
@@ -46,9 +46,9 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
 
 ---
 
-## ðŸ”— API Endpoints
+## API Endpoints
 
-### 1. ðŸ“¤ Submit a new image job
+### 1. Submit a new image job
 `POST /submit`  
 Upload a JPG/PNG image for text extraction.  
 
@@ -64,7 +64,7 @@ curl -X POST "http://localhost:8000/submit" \
 
 ---
 
-### 2. ðŸ“Š Get job status
+### 2. Get job status
 `GET /status/{job_id}`  
 
 Check if the job is `queued`, `processing`, `done`, or `failed`.  
@@ -79,7 +79,7 @@ Response:
 
 ---
 
-### 3. ðŸ“œ Get job result
+### 3. Get job result
 `GET /result/{job_id}`  
 
 If the job is done, returns the extracted text.  
@@ -94,7 +94,7 @@ Response:
 
 ---
 
-## ðŸ§ª Testing the API
+## Testing the API
 
 A sample Python client is included:  
 
@@ -104,7 +104,7 @@ python python_client.py
 ```
 
 Sample images are available in:  
-ðŸ“‚ `tests/sample_images/`  
+`tests/sample_images/`  
 
 Example result screenshot:  
 
@@ -113,7 +113,7 @@ Example result screenshot:
 
 ---
 
-## ðŸ“· UI Previews
+## UI Previews
 
 - RabbitMQ Management:  
   ![RabbitMQ UI](docs/rabbitmq-ui.png)  
