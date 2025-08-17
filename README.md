@@ -108,17 +108,10 @@ Sample images are available in:
 <img width="1876" height="457" alt="image" src="https://github.com/user-attachments/assets/b6800077-8dea-4b4a-9831-242505ff5574" />
   
 
-Example result screenshot:  
-
-![Result Example](docs/result-example.png)  
-*(Replace with your screenshot showing job result)*  
-
 ---
 
 ## UI Previews
 
-- RabbitMQ Management:  
-  ![RabbitMQ UI](docs/rabbitmq-ui.png)  
+- RabbitMQ Management
 
 - FastAPI Docs:  
-  ![FastAPI Swagger](docs/fastapi-docs.png)  
