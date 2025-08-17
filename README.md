@@ -34,9 +34,9 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
    docker compose up --build
    ```
 
-   âœ… This will start:
-   - **RabbitMQ** â†’ [http://localhost:15672](http://localhost:15672) (`guest/guest`)  
-   - **Producer API (FastAPI)** â†’ [http://localhost:8000](http://localhost:8000)  
+   This will start:
+   - **RabbitMQ** [http://localhost:15672](http://localhost:15672) (`guest/guest`)  
+   - **Producer API (FastAPI)** [http://localhost:8000](http://localhost:8000)  
    - **Consumer worker**
 
    To view logs:
