@@ -26,6 +26,7 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
    AMQP_URL=amqp://guest:guest@rabbitmq:5672/
    SQLITE_PATH=/data/app.db
    UPLOAD_DIR=/data/uploads
+   API_NINJAS_KEY = *****************
    ```
 
 3. **Build and start the services**
