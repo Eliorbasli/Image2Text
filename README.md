@@ -104,7 +104,8 @@ python python_client.py
 ```
 
 Sample images are available in:  
-`tests/sample_images/`  
+<img width="1876" height="457" alt="image" src="https://github.com/user-attachments/assets/b6800077-8dea-4b4a-9831-242505ff5574" />
+  
 
 Example result screenshot:  
 
