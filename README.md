@@ -8,8 +8,8 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
 - **Consumer**: Worker service that consumes jobs from RabbitMQ, extracts text, and stores results in the database  
 - **Common**: Shared utilities (DB models, config, RabbitMQ, and Enums)  
 
-![Architecture Diagram](docs/architecture.png)  
-*(Replace with your architecture diagram if available)*  
+<img width="871" height="541" alt="Image2Text Diagram" src="https://github.com/user-attachments/assets/5e0cf3b6-30ed-4478-a9e3-59e9e2c70dde" />
+
 
 ---
 
@@ -34,9 +34,9 @@ It is built with **[FastAPI](https://fastapi.tiangolo.com/)**, **[RabbitMQ](http
    ```
 
    âœ… This will start:
-   - ðŸ‡ **RabbitMQ** â†’ [http://localhost:15672](http://localhost:15672) (`guest/guest`)  
-   - âš¡ **Producer API (FastAPI)** â†’ [http://localhost:8000](http://localhost:8000)  
-   - ðŸ”„ **Consumer worker**
+   - **RabbitMQ** â†’ [http://localhost:15672](http://localhost:15672) (`guest/guest`)  
+   - **Producer API (FastAPI)** â†’ [http://localhost:8000](http://localhost:8000)  
+   - **Consumer worker**
 
    To view logs:
    ```bash
@@ -82,7 +82,7 @@ Response:
 ### 3. Get job result
 `GET /result/{job_id}`  
 
-If the job is done, returns the extracted text.  
+If the job is done, return the extracted text.  
 
 Response:
 ```json
