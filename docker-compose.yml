@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  producer:
+    build:
+      context: .
+      dockerfile: producer/Dockerfile
+    environment:
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672/
+      SQLITE_PATH: /app/data/app.db
+      UPLOAD_DIR: /app/data/uploads
+      EXCHANGE: events
+      ROUTING_PREFIX: app
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    build:
+      context: .
+      dockerfile: consumer/Dockerfile
+    environment:
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672/
+      SQLITE_PATH: /app/data/app.db
+      UPLOAD_DIR: /app/data/uploads
+      ROUTING_PREFIX: app
+      OCR_MODE: stub
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - rabbitmq

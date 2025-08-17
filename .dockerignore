@@ -1,0 +1,9 @@
+**/__pycache__/
+**/*.pyc
+.venv/
+venv/
+producer/.venv/
+consumer/.venv/
+.git
+.env
+data/uploads/tmp/
